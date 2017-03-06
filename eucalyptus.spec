@@ -514,10 +514,12 @@ cp -Rp admin-tools/conf/* $RPM_BUILD_ROOT/%{_sysconfdir}/eucalyptus-admin
 %dir /etc/eucalyptus/cloud.d/elb-security-policy
 %config(noreplace) /etc/eucalyptus/cloud.d/elb-security-policy/*
 /etc/eucalyptus/cloud.d/scripts/
+%{_libexecdir}/eucalyptus/euca-cassandra
 %{_libexecdir}/eucalyptus/euca-upgrade
 /usr/sbin/eucalyptus-cloud
+/usr/share/eucalyptus/cassandra
 %ghost /var/lib/eucalyptus/services
-%attr(-,eucalyptus,eucalyptus) /var/lib/eucalyptus/webapps/
+%attr(-,eucalyptus,eucalyptus) %dir /var/lib/eucalyptus/cassandra
 %{_sysctldir}/70-eucalyptus-cloud.conf
 %{_unitdir}/eucalyptus-cloud.service
 %{_unitdir}/eucalyptus-cloud-upgrade.service
@@ -699,6 +701,9 @@ usermod -a -G libvirt eucalyptus || :
 
 
 %changelog
+* Mon Mar  6 2017 Steve Jones <steve.jones@hpe.com> - 5.0.0
+- Add files for eucalyptus managed cassandra (EUCA-13201)
+
 * Mon Feb 13 2017 Matt Bacchi <mbacchi@hpe.com> - 4.4.0
 - Add eucalyptus-selinux dependency to eucalyptus package (EUCA-13225)
 
